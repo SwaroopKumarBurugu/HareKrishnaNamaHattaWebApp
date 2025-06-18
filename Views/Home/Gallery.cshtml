@@ -1,0 +1,31 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "Gallery";
+}
+<style>
+    .gallery-image {
+        width: 100%; /* Full width of container */
+        max-width: 800px; /* Optional: limits image size */
+        height: 500px; /* Maintains aspect ratio */
+        max-height: 500px; /* Optional: caps height for visual consistency */
+        object-fit: cover; /* Crops excess area if needed */
+        object-position: center; /* Centers the visible area */
+    }
+</style>
+
+<div class="container mt-4">
+    <h2>Temple Gallery</h2>
+    <p>Explore the divine moments captured at our temple.</p>
+
+    <div class="row">
+        @foreach (var imgPath in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="@imgPath" class="img-fluid rounded mt-3 gallery-image" alt="Gallery Temple" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

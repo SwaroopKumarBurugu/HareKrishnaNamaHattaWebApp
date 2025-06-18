@@ -1,0 +1,61 @@
+﻿@model List<HareKrishnaNamaHattaWebApp.Models.Donation>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Donations";
+}
+
+<div class="container mt-4 mb-5">
+    <h2 class="text-success mb-4">Donation Records</h2>
+
+    <div class="table-responsive shadow-sm">
+        <table class="table table-bordered table-hover bg-white">
+            <thead class="table-success text-center">
+                <tr>
+                    <th>Donor</th>
+                    <th>Amount (INR)</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model)
+                {
+                    <tr>
+                        <td>@d.DonorName</td>
+                        <td class="text-end">₹@d.Amount.ToString("N2")</td>
+                        <td>@d.Message</td>
+                        <td>@d.DonationDate.ToString("dd MMM yyyy HH:mm tt")</td>
+                        <td>
+                            <a asp-controller="Admin" asp-action="SendReceipt" asp-route-id="@d.Id" class="btn btn-sm btn-warning">Send Receipt</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>    
+
+    <!-- Pagination -->
+    <nav aria-label="Donation Pagination" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Donations", new { page = ViewBag.CurrentPage - 1 })">Previous</a>
+            </li>
+
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Donations", new { page = i })">@i</a>
+                </li>
+            }
+
+            <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Donations", new { page = ViewBag.CurrentPage + 1 })">Next</a>
+            </li>
+        </ul>
+
+        <p>Page @ViewBag.CurrentPage of @ViewBag.TotalPages</p>
+
+    </nav>
+    </div>
+</div>

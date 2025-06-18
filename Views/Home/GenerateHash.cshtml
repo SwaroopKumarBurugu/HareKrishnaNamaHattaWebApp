@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Generate Password Hash";
+}
+
+<h2>BCrypt Password Hash Generator</h2>
+
+<p><strong>Plain Password:</strong> @ViewBag.PlainPassword</p>
+<p><strong>Generated Hash:</strong></p>
+<pre style="background-color:#f8f9fa;padding:10px;border:1px solid #ccc;">
+    @ViewBag.HashedPassword
+</pre>
+
+<p style="color:red;">
+    ⚠️ For security reasons, remove this method after you’ve generated the hash you need.
+</p>

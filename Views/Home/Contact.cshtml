@@ -1,0 +1,44 @@
+﻿@model HareKrishnaNamaHattaWebApp.Models.ContactMessage
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<div class="container mt-4 mb-5">
+    <h2 class="text-success mb-4">Contact Us</h2>
+
+    <form asp-action="Contact" method="post" class="shadow p-4 bg-white rounded">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label fw-bold"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label fw-bold"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Subject" class="form-label fw-bold"></label>
+            <input asp-for="Subject" class="form-control" />
+            <span asp-validation-for="Subject" class="text-danger"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Message" class="form-label fw-bold"></label>
+            <textarea asp-for="Message" rows="4" class="form-control"></textarea>
+            <span asp-validation-for="Message" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Submit</button>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,81 @@
+﻿@model HareKrishnaNamaHattaWebApp.ViewModels.HomePageEventsViewModel;
+@{
+    ViewData["Title"] = "Home";
+}
+<style>
+    .home-image{
+        width: 100%; /* Full width of container */
+        max-width: 800px; /* Optional: limits image size */
+        height: 550px; /* Maintains aspect ratio */
+        max-height: 550px; /* Optional: caps height for visual consistency */
+        object-fit: cover; /* Crops excess area if needed */
+        object-position: Left; /* Centers the visible area */
+    }
+</style>
+<div class="container mt-1">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold text-success">Welcome to Hare Krishna Nama Hatta</h1>
+        <p class="lead">A spiritual center for devotion, community service, and divine knowledge.</p>
+    </div>
+
+    <!-- About Section -->
+    <div class="row align-items-center mb-5">
+        <div class="col-md-6 mb-4 mb-md-0">
+            <img src="~/uploads/gallery/img-20250416-wa0095.jpg" class="img-fluid rounded shadow-sm home-image" alt="Temple Front" />
+        </div>
+        <div class="col-md-6 mb-4 mb-md-0">
+            <h3 class="text-success">Building a Spiritual Home</h3>
+            <p class="text-justify">
+                <strong>By the boundless mercy of Lord Krishna</strong>, a Hare Krishna Namahatta program was initiated last year in Pattazhy—a small and scenic village nestled in the foothills of the Western Ghats in Kerala.
+            </p>
+            <p class="text-justify">
+                Through His divine grace, the program has flourished, and now, over 100 devotees gather each week to chant the holy names and hear the glories of the Lord.
+            </p>
+            <p class="text-justify">
+                With the blessings of His Holiness Mahavishnu Maharaj and the unlimited mercy of Sri Krishna, we are grateful to announce the establishment of a new facility. This building includes a kitchen, a prasadam hall, and accommodations for the pujaris—enabling us to better serve both the Vaishnavas and the Deities.
+            </p>
+            <p class="text-justify">
+                With hearts full of devotion, we are now prayerfully preparing for the construction of a temple dedicated to the worship of Their Lordships—Sri Jagannath, Baladev, and Subhadra Devi.
+            </p>
+            <p class="text-justify">
+                May Their divine presence continue to guide and bless this sacred endeavor.
+            </p>
+            <a class="btn btn-success mt-3" href="/Home/About">Learn More</a>
+        </div>
+    </div>
+
+   @*  <!-- EveryDay Events -->
+    <div class="mb-5">
+         @await Html.PartialAsync("_EveryDayEventsPartial", Model) 
+    </div>
+    <!-- Upcoming Events -->
+    <div class="mb-5">
+        @await Html.PartialAsync("_UpcomingEventsPartial", Model)
+    </div> *@
+    
+    <div class="mb-3">
+        <h4 class="text-primary mb-2">Special Events</h4>
+    @await Html.PartialAsync("_SpecialEventsPartial", Model.SpecialEvents)
+    </div>
+
+    <div class="mb-3">
+        <h4 class="text-primary mb-2">
+            Everyday Events</h4>
+    @await Html.PartialAsync("_EverydayEventsPartial", Model.EverydayEvents)
+    </div>
+
+    <div class="mb-3">
+        <h4 class="text-primary mb-2">
+            Opening Hours</h4>
+        <p><strong>Every Day Morning 4am to 10pm</strong></p>
+    </div>
+
+    <!-- Support Section -->
+    <div class="text-center mb-5">
+        <h5 class="fw-bold">Support Our Spiritual Mission</h5>
+        <p>Your generous donations help us serve the community and keep our temple activities thriving.</p>
+        <a class="btn btn-warning me-2" href="/Home/Donate">Donate Now</a>
+        <a class="btn btn-outline-secondary" href="/Home/Contact">Contact Us</a>
+    </div>
+</div>

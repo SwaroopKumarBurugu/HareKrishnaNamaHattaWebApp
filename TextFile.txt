@@ -1,0 +1,11 @@
+﻿Further Advancements:
+
+Voluteer Service => Get the details of Voluteers from Volunteer Page ==> Done
+Reply Functionality on Admin=>Contact Messages page to the the devotee whoever raised a query by taking their email from the table need to provide reply functionality with in page
+Send Receipt Functionality in Admin=> Donations Page need to provide ability to send receipt by taking the info from the table of email and amount and 
+name need to send thank you message along with receipt attached ==> Done
+BackGround for all pages it should be pleasant and spiritual ==> Done
+Books Selling 
+Styling all pages nicely
+
+Need to fix all email formats and optimize email code

@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-5 mb-5">
+    <h2 class="mb-3 text-primary">Welcome to the Admin Dashboard</h2>
+    <p class="mb-4">Use the links below to manage data:</p>
+
+    <div class="d-grid gap-3 col-md-6 mx-auto">
+        <a asp-controller="Admin" asp-action="Donations" class="btn btn-info btn-lg">View Donations</a>
+        <a asp-controller="Admin" asp-action="ContactMessages" class="btn btn-info btn-lg">View Contact Messages</a>
+        <a asp-controller="Admin" asp-action="Events" class="btn btn-info btn-lg">Manage Events</a>
+        <a asp-controller="Admin" asp-action="VolunteerDevotees" class="btn btn-info btn-lg">Volunteer Devotees</a>
+    </div>
+</div>

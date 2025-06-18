@@ -1,0 +1,20 @@
+﻿@model HareKrishnaNamaHattaWebApp.Models.AdminCredentials
+
+<h2>Admin Login</h2>
+
+<form method="post" asp-controller="Admin" asp-action="Login" class="w-50">
+    <div class="mb-3">
+        <label asp-for="Username" class="form-label"></label>
+        <input asp-for="Username" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="PasswordHash" class="form-label"></label>
+        <input asp-for="PasswordHash" type="password" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+
+    @if (Model?.ErrorMessage != null)
+    {
+        <div class="alert alert-danger mt-2">@Model.ErrorMessage</div>
+    }
+</form>

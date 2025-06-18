@@ -1,0 +1,35 @@
+﻿@model List<HareKrishnaNamaHattaWebApp.Models.Event>
+@{
+    ViewData["Title"] = "All Upcoming Events";
+}
+
+<style>
+    .event-image {
+        width: 100%; /* Full width of container */
+        max-width: 500px; /* Optional: limits image size */
+        height: auto; /* Maintains aspect ratio */
+        max-height: 250px; /* Optional: caps height for visual consistency */
+        object-fit: cover; /* Crops excess area if needed */
+        object-position: center; /* Centers the visible area */
+    }
+</style>
+
+<div class="container mt-4">
+    <h2 class="text-primary mb-4">Upcoming Events</h2>
+    <div class="row">
+        @foreach (var evt in Model)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <img src="@Url.Content("~/uploads/event-logos/" + (evt.ImagePath ?? "default.jpg"))" class="img-fluid rounded mt-3 event-image" alt="@evt.Title" />
+                    <div class="card-body">
+                        <h5 class="card-title">@evt.Title</h5>
+                        <p class="card-text"><strong>Date:</strong> @evt.Date.ToString("dd MMM yyyy HH:mm tt")</p>
+                        <p class="card-text">@evt.Description?.Substring(0, Math.Min(evt.Description.Length, 150))...</p>
+                        <a href="@Url.Action("EventDetails", "Home", new { id = evt.Id })" class="btn btn-sm btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

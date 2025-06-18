@@ -1,0 +1,63 @@
+﻿@model IEnumerable<HareKrishnaNamaHattaWebApp.Models.VolunteerDevotees>
+@{
+    ViewData["Title"] = "Volunteer Devotees";
+}
+
+
+<div class="container mt-4 mb-5">
+    <h2 class="text-success mb-4">Volunteer Devotees</h2>
+
+    <div class="table-responsive shadow-sm">
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Service Type</th>
+            <th>Available Date</th>
+            <th>Notes</th>
+            <th>Submitted On</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var v in Model)
+        {
+            <tr>
+                <td>@v.Name</td>
+                <td>@v.Email</td>
+                <td>@v.Phone</td>
+                <td>@v.ServiceType</td>
+                <td>@v.PreferredDate.ToShortDateString()</td>
+                <td>@v.AdditionalNotes</td>
+                <td>@v.SubmittedOn.ToString("dd MMM yyyy HH:mm tt")</td>              
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Pagination -->
+<nav aria-label="Donation Pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("VolunteerDevotees", new { page = ViewBag.CurrentPage - 1 })">Previous</a>
+        </li>
+
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("VolunteerDevotees", new { page = i })">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("VolunteerDevotees", new { page = ViewBag.CurrentPage + 1 })">Next</a>
+        </li>
+    </ul>
+
+    <p>Page @ViewBag.CurrentPage of @ViewBag.TotalPages</p>
+
+</nav>
+</div>
+</div>
