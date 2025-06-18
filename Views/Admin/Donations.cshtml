@@ -26,9 +26,23 @@
                         <td>@d.DonorName</td>
                         <td class="text-end">₹@d.Amount.ToString("N2")</td>
                         <td>@d.Message</td>
-                        <td>@d.DonationDate.ToString("dd MMM yyyy HH:mm tt")</td>
-                        <td>
-                            <a asp-controller="Admin" asp-action="SendReceipt" asp-route-id="@d.Id" class="btn btn-sm btn-warning">Send Receipt</a>
+                        <td>@d.DonationDate.ToString("dd MMM yyyy HH:mm tt")</td>                       
+                        <td class="text-center">
+                            @if (!d.ReceiptSent)
+                            {
+                                <a asp-controller="Admin"
+                                   asp-action="SendReceipt"
+                                   asp-route-id="@d.Id"
+                                   class="btn btn-sm btn-danger">
+                                    Send Receipt
+                                </a>
+                            }
+                            else
+                            {
+                                <button class="btn btn-sm btn-success" disabled>
+                                    Receipt Sent
+                                </button>
+                            }
                         </td>
                     </tr>
                 }

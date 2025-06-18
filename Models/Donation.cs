@@ -21,5 +21,8 @@ namespace HareKrishnaNamaHattaWebApp.Models
         public string Message { get; set; }
 
         public DateTime DonationDate { get; set; } = DateTime.UtcNow;
+        // ← new flag
+        public bool ReceiptSent { get; set; } = false;
+
     }
 }

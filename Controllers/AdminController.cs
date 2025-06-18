@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HareKrishnaNamaHattaWebApp.Controllers;
+using HareKrishnaNamaHattaWebApp.Data;
+using HareKrishnaNamaHattaWebApp.Models;
+using HareKrishnaNamaHattaWebApp.Utility;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using HareKrishnaNamaHattaWebApp.Models;
-using System;
-using HareKrishnaNamaHattaWebApp.Data;
-using Microsoft.EntityFrameworkCore;
-using HareKrishnaNamaHattaWebApp.Controllers;
-using System.Drawing.Printing;
-using System.Net.Mail;
-using System.Net;
 using Microsoft.Extensions.Options;
+using System;
+using System.Drawing.Printing;
+using System.Net;
+using System.Net.Mail;
 
 
 public class AdminController : BaseController
@@ -146,7 +147,7 @@ public class AdminController : BaseController
 
         var events = await _context.Events.OrderByDescending(e => e.Date).ToListAsync();
         return View(events);
-    }
+    } 
 
     [HttpGet]
     public async Task<IActionResult> SendReceipt(int id)
@@ -179,6 +180,9 @@ public class AdminController : BaseController
         try
         {
             await HareKrishnaNamaHattaWebApp.Utility.EmailHelper.SendEmailAsync(donation.Email, subject, emailBody, _smtpSettings.Username, _smtpSettings.Password, _smtpSettings.Host, _smtpSettings.Port, _smtpSettings.FromEmail);
+            // mark as receipt sent
+            donation.ReceiptSent = true;
+            await _context.SaveChangesAsync();
             TempData["SuccessMessage"] = $"Receipt sent to {donation.Email}.";
         }
         catch (Exception ex)
