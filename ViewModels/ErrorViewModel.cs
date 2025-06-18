@@ -1,9 +1,9 @@
-namespace HareKrishnaNamaHattaWebApp.Models
+﻿namespace HareKrishnaNamaHattaWebApp.ViewModels
 {
     public class ErrorViewModel
     {
         public string? RequestId { get; set; }
-
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
+
 }

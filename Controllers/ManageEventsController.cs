@@ -13,7 +13,7 @@ namespace HareKrishnaNamaHattaWebApp.Controllers
         private readonly AppDbContext _context;
         private readonly ILogger<ManageEventsController> _logger;
 
-        public ManageEventsController(AppDbContext context, ILogger<ManageEventsController> logger)
+        public ManageEventsController(AppDbContext context, ILogger<ManageEventsController> logger):base(logger)
         {
             _context = context;
             _logger = logger;

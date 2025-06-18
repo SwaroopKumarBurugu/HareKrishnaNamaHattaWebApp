@@ -19,7 +19,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
-
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
 builder.Services.AddScoped<ManageEventService>();
 
@@ -52,4 +53,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.UseStatusCodePagesWithReExecute("/Home/Error", "?code={0}");
+app.UseExceptionHandler("/Home/Error");
 app.Run();

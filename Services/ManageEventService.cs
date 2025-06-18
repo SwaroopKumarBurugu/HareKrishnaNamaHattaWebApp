@@ -60,7 +60,7 @@ namespace HareKrishnaNamaHattaWebApp.Services
         public async Task<List<Event>> GetSpecialEventsAsync()
         {
             return await _context.Events
-                .Where(e => e.EventType=="Special")
+                .Where(e => e.EventType == "Special" && e.Date >= DateTime.Today)
                 .OrderByDescending(e => e.Date)
                 .ToListAsync();
         }

@@ -11,7 +11,7 @@ using System.Net.Mail;
 using System.Net;
 using Microsoft.Extensions.Options;
 
-[AdminAuthorize]
+
 public class AdminController : BaseController
 {
     private readonly IConfiguration _config;
@@ -27,13 +27,13 @@ public class AdminController : BaseController
         _smtpSettings = smtpOptions.Value;
         ViewData["Layout"] = "_AdminLayout";
     }
-
+  
     [HttpGet]
     public IActionResult Login()
     {
         return View(new AdminCredentials());
     }
-
+    
     [HttpPost]
     public IActionResult Login(AdminCredentials model)
     {

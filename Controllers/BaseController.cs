@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HareKrishnaNamaHattaWebApp.Controllers
 {
-    [AdminAuthorize]
+ 
     public class BaseController : Controller
     {
         private readonly ILogger _logger;
