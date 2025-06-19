@@ -4,6 +4,7 @@ using HareKrishnaNamaHattaWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HareKrishnaNamaHattaWebApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250619043210_FixVolunteerServiceRelation")]
+    partial class FixVolunteerServiceRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,9 +176,6 @@ namespace HareKrishnaNamaHattaWebApp.Migrations
 
                     b.Property<DateTime>("PreferredDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<TimeSpan?>("PreferredTime")
-                        .HasColumnType("time");
 
                     b.Property<DateTime>("SubmittedOn")
                         .ValueGeneratedOnAdd()

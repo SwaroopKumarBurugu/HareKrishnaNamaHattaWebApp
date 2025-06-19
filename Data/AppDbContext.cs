@@ -12,6 +12,8 @@ namespace HareKrishnaNamaHattaWebApp.Data
         public DbSet<ContactMessage> ContactMessages { get; set; }
         public DbSet<Donation> Donations { get; set; }
         public DbSet<VolunteerDevotees> VolunteerDevotees { get; set; }
+        public DbSet<ServiceCategory> ServiceCategories { get; set; }
+        public DbSet<VolunteerService> VolunteerServices { get; set; }
 
         //Future Improvements
         //public DbSet<Volunteer> Volunteers { get; set; }

@@ -199,13 +199,15 @@ public class AdminController : BaseController
         if (!IsAdminLoggedIn()) return RedirectToAction("Login");
 
         var volunteers = await _context.VolunteerDevotees
+            .Include(v => v.VolunteerService)
+         .ThenInclude(s => s.Category)
             .OrderByDescending(v => v.PreferredDate)
             .ToListAsync();
         var totalVolunteers = volunteers.Count();
         ViewBag.CurrentPage = page;
         ViewBag.PageSize = pageSize;
         ViewBag.TotalPages = (int)Math.Ceiling((double)totalVolunteers / pageSize);
-
+        
         return View(volunteers);
     }
 

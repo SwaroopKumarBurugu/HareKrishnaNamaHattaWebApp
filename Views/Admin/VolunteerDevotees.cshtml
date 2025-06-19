@@ -9,55 +9,66 @@
 
     <div class="table-responsive shadow-sm">
 
-<table class="table table-bordered table-striped">
-    <thead class="table-dark">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Service Type</th>
-            <th>Available Date</th>
-            <th>Notes</th>
-            <th>Submitted On</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var v in Model)
-        {
-            <tr>
-                <td>@v.Name</td>
-                <td>@v.Email</td>
-                <td>@v.Phone</td>
-                <td>@v.ServiceType</td>
-                <td>@v.PreferredDate.ToShortDateString()</td>
-                <td>@v.AdditionalNotes</td>
-                <td>@v.SubmittedOn.ToString("dd MMM yyyy HH:mm tt")</td>              
-            </tr>
-        }
-    </tbody>
-</table>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Service Category</th>
+                    <th>Service Name</th>
+                    <th>Available On</th>
+                    <th>Notes</th>
+                    <th>Submitted On</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var v in Model)
+                {
+                    <tr>
+                        <td>@v.Name</td>
+                        <td>@v.Email</td>
+                        <td>@v.Phone</td>
+                        <td>@v.VolunteerService?.Category?.Name</td>
+                        <td>@v.VolunteerService?.Name</td>
+                        <td>
+                            @v.PreferredDate?.ToString("dd MMM yyyy")
+                            <br />
+                            @((v.PreferredTime.HasValue ? DateTime.Today.Add(v.PreferredTime.Value).ToString("h:mm tt") : "Not set"))
+                        </td>
+                        <td>@v.AdditionalNotes</td>
+                        <td>
+                            @v.SubmittedOn.ToString("dd MMM yyyy")
+                            <br />
+                            @v.SubmittedOn.ToString("hh:mm tt")
+                        </td>
+                    </tr>
 
-<!-- Pagination -->
-<nav aria-label="Donation Pagination" class="mt-4">
-    <ul class="pagination justify-content-center">
-        <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                }
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <nav aria-label="Donation Pagination" class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
                     <a class="page-link" href="@Url.Action("VolunteerDevotees", new { page = ViewBag.CurrentPage - 1 })">Previous</a>
-        </li>
+                </li>
 
-        @for (int i = 1; i <= ViewBag.TotalPages; i++)
-        {
-            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
                         <a class="page-link" href="@Url.Action("VolunteerDevotees", new { page = i })">@i</a>
-            </li>
-        }
+                    </li>
+                }
 
-        <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
                     <a class="page-link" href="@Url.Action("VolunteerDevotees", new { page = ViewBag.CurrentPage + 1 })">Next</a>
-        </li>
-    </ul>
+                </li>
+            </ul>
 
-    <p>Page @ViewBag.CurrentPage of @ViewBag.TotalPages</p>
+            <p>Page @ViewBag.CurrentPage of @ViewBag.TotalPages</p>
 
-</nav>
-</div>
+        </nav>
+    </div>
 </div>

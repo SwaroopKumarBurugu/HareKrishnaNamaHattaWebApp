@@ -4,6 +4,7 @@ using HareKrishnaNamaHattaWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HareKrishnaNamaHattaWebApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250619034118_AddServiceCategoryTable")]
+    partial class AddServiceCategoryTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,14 +177,15 @@ namespace HareKrishnaNamaHattaWebApp.Migrations
                     b.Property<DateTime>("PreferredDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<TimeSpan?>("PreferredTime")
-                        .HasColumnType("time");
+                    b.Property<string>("ServiceType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("SubmittedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("VolunteerServiceId")
+                    b.Property<int?>("VolunteerServiceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -191,7 +195,7 @@ namespace HareKrishnaNamaHattaWebApp.Migrations
                     b.ToTable("VolunteerDevotees");
                 });
 
-            modelBuilder.Entity("HareKrishnaNamaHattaWebApp.Models.VolunteerService", b =>
+            modelBuilder.Entity("VolunteerService", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -215,16 +219,12 @@ namespace HareKrishnaNamaHattaWebApp.Migrations
 
             modelBuilder.Entity("HareKrishnaNamaHattaWebApp.Models.VolunteerDevotees", b =>
                 {
-                    b.HasOne("HareKrishnaNamaHattaWebApp.Models.VolunteerService", "VolunteerService")
+                    b.HasOne("VolunteerService", null)
                         .WithMany("VolunteerDevotees")
-                        .HasForeignKey("VolunteerServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("VolunteerService");
+                        .HasForeignKey("VolunteerServiceId");
                 });
 
-            modelBuilder.Entity("HareKrishnaNamaHattaWebApp.Models.VolunteerService", b =>
+            modelBuilder.Entity("VolunteerService", b =>
                 {
                     b.HasOne("HareKrishnaNamaHattaWebApp.Models.ServiceCategory", "Category")
                         .WithMany("Services")
@@ -240,7 +240,7 @@ namespace HareKrishnaNamaHattaWebApp.Migrations
                     b.Navigation("Services");
                 });
 
-            modelBuilder.Entity("HareKrishnaNamaHattaWebApp.Models.VolunteerService", b =>
+            modelBuilder.Entity("VolunteerService", b =>
                 {
                     b.Navigation("VolunteerDevotees");
                 });

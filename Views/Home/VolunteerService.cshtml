@@ -18,17 +18,11 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="ServiceType"></label>
-        <select asp-for="ServiceType" class="form-control">
+        <label asp-for="VolunteerServiceId">Service Type</label>
+        <select asp-for="VolunteerServiceId" class="form-control" id="ServiceDropdown">
             <option value="">-- Select Service Type --</option>
-            <option>Packing Prasadam</option>
-            <option>Cleaning Temple</option>
-            <option>Decoration</option>
-            <option>Cooking</option>
-            <option>Book Distribution</option>
-            <option>Event Coordination</option>
         </select>
-        <span asp-validation-for="ServiceType" class="text-danger"></span>
+        <span asp-validation-for="VolunteerServiceId" class="text-danger"></span>
     </div>
 
     <div class="form-group">
